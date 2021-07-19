@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const cellarSchema = new Schema(
+const winerySchema = new Schema(
 	{
 		name: String,
 		address: String,
@@ -17,6 +17,5 @@ const cellarSchema = new Schema(
 	}
 );
 
-const Cellar = mongoose.model('Cellar', cellarSchema);
-
-module.export = Cellar;
+const Winery = mongoose.model('Winery', winerySchema);
+module.exports = Winery;

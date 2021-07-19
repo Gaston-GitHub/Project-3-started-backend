@@ -3,7 +3,6 @@ const { checkIfLoggedIn } = require('../middlewares');
 
 const router = express.Router();
 const Wine = require('../models/Wine');
-// const Cellar = require('../models/Cellar');
 
 router.use(checkIfLoggedIn);
 //  create and save a new wine
@@ -11,12 +10,13 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
 	if (!req.body.name) {
 		res.status(400).send({ message: 'Content can not be empty' });
 	}
-	const { name, type, grape, country, price, reviews, images } = req.body;
+	const { name, type, grape, year, country, price, reviews, images } = req.body;
 	try {
 		const wine = await Wine.create({
 			name,
 			type,
 			grape,
+			year,
 			country,
 			price,
 			reviews,
@@ -38,7 +38,7 @@ router.get('/:id', checkIfLoggedIn, async (req, res, next) => {
 	try {
 		const wine = await Wine.findById(id);
 		if (wine === null) {
-			const notFound = new Error('no found');
+			const notFound = new Error('not found');
 			notFound.status = 404;
 			throw notFound;
 		}
