@@ -12,7 +12,6 @@ require('dotenv').config();
 const authRouter = require('./routes/auth');
 const demoRouter = require('./routes/demo');
 const wineRouter = require('./routes/wine');
-const wineryRouter = require('./routes/winery');
 
 async function setupApp() {
 	const app = express();
@@ -46,7 +45,6 @@ async function setupApp() {
 	app.use('/', authRouter);
 	app.use('/protected', demoRouter);
 	app.use('/wine', wineRouter);
-	app.use('/winery', wineryRouter);
 
 	// catch 404 and forward to error handler
 	app.use((req, res, next) => {
