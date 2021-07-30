@@ -6,8 +6,20 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const cors = require('cors');
 const createError = require('http-errors');
+const mongoose = require('mongoose');
 
 require('dotenv').config();
+
+mongoose
+	.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+	.then(() => {
+		// eslint-disable-next-line no-console
+		console.log('Connected to DB 🚀');
+	})
+	.catch(error => {
+		// eslint-disable-next-line no-console
+		console.log('error ', error);
+	});
 
 const authRouter = require('./routes/auth');
 const demoRouter = require('./routes/demo');
@@ -33,7 +45,7 @@ async function setupApp() {
 				mongoUrl: process.env.MONGODB_URI,
 				ttl: 24 * 60 * 60,
 			}),
-			secret: process.env.SECRET_SESSION, // should be inside .env
+			secret: process.env.SECRET_SESSION,
 			resave: true,
 			saveUninitialized: true,
 			cookie: {
