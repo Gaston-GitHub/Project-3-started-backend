@@ -10,7 +10,7 @@ const wineSchema = new Schema(
 		year: String,
 		country: String,
 		price: String,
-		reviews: String,
+		review: String,
 	},
 	{
 		timestamps: {
