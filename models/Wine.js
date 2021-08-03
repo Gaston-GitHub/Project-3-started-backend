@@ -11,7 +11,6 @@ const wineSchema = new Schema(
 		country: String,
 		price: String,
 		reviews: String,
-		images: String,
 	},
 	{
 		timestamps: {

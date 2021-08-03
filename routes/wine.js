@@ -10,7 +10,7 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
 	if (!req.body.name) {
 		res.status(400).send({ message: 'Content can not be empty' });
 	}
-	const { name, type, grape, year, country, price, reviews, images } = req.body;
+	const { name, type, grape, year, country, price, review } = req.body;
 	try {
 		const wine = await Wine.create({
 			name,
@@ -19,8 +19,7 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
 			year,
 			country,
 			price,
-			reviews,
-			images,
+			review,
 		});
 		res.json({ create: wine });
 	} catch (error) {
@@ -49,14 +48,10 @@ router.get('/:id', checkIfLoggedIn, async (req, res, next) => {
 });
 // retireve wine finding by id and update
 router.put('/:id', checkIfLoggedIn, async (req, res) => {
-	const { name, type, grape, country, price, reviews, images } = req.body;
+	const { name, type, grape, country, price, review } = req.body;
 	const { id } = req.params;
 
-	const updatedWine = await Wine.findByIdAndUpdate(
-		id,
-		{ name, type, grape, country, price, reviews, images },
-		{ new: true }
-	);
+	const updatedWine = await Wine.findByIdAndUpdate(id, { name, type, grape, country, price, review }, { new: true });
 	res.json({ updated: updatedWine });
 });
 // delete wine
